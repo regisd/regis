@@ -1,0 +1,7 @@
+# Prevent Files image/file hotlinking
+# and bandwidth stealing
+RewriteEngine On
+RewriteBase /blog/wp-content/uploads/
+#RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://regis.decamps.info/.*$ [NC]
+RewriteRule \.(gif|jpg|jpeg|swf|flv|png)$ / [F,L]

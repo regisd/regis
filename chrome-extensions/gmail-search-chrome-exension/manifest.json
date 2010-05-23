@@ -1,0 +1,15 @@
+{
+"authors": [ {
+  "email": "decamps@users.sf.com",
+  "name": "Régis Décamps"
+  } ],
+"background_page": "background.html",
+"permissions":[
+  "experimental",
+  "tabs"
+  ],
+"description": "Add Googlemail search feature in context menu.",
+"homepage": "http://code.google.com/p/regis/wiki/GmailSearchExtension",
+"name": "Gmail Search",
+"version": "0.1"
+}

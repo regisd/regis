@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Gmail search extension background page</title>
+<script type="text/javascript">
+
+                   
+function getGmailResults(info, tab) {
+	 // text longer than 50 chars is unlikely an email
+	 var maxLength = 50;
+
+	 if (!info.selectionText || info.selectionText.length == 0 || info.selectionText.length > maxLength ) {
+	   return;
+	 }
+	 var url = "https://mail.google.com/mail/#search/" + escape(info.selectionText);
+	 chrome.tabs.create({"url": url});
+	 
+	}
+chrome.experimental.contextMenu.create({"title": "Search '%s' in Gmail", 
+		"onclick": getGmailResults,
+        "contexts":["SELECTION"]});
+</script>
+</head>
+<body>
+<p>This page is used to extend the context menu of Chrome with Gmail search.</p>
+</body>
+</html>

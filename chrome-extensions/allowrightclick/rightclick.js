@@ -1,12 +1,16 @@
 // if (document.addEventListener)
 //   document.addEventListener("DOMContentLoaded", walkmydog, false)
-var timer = window.setInterval(function() {
+
+if (!document.domain.match("google|yahoo")) {
+  //deactivate the extension on these sites (saves Yahoo! mail, etc)
+  var timer = window.setInterval(function() {
             if (/loaded|complete/.test(document.readyState)){
                 window.clearInterval(timer);
                 enableContextMenu();
             }
           }, 30);
-	  
+}
+
 function enableContextMenu() {
   console.log("allow right click on "+window.location);
   void(document.ondragstart=null);

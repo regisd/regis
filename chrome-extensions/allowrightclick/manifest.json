@@ -5,12 +5,19 @@
   } ],
 "icons": { "48": "mouse48.png",
           "128": "mouse128.png" },
-"content_scripts": [ {
-  "js": [ "rightclick.js" ],
-  "matches": [ "http://*/*", "https://*/*" ]
-  } ],
+"content_scripts": [ 
+  { 
+    /*"js": [ "rightclick_flickr.js" ], */
+    "css": [ "flickr.css" ],
+    "matches": [ "http://www.flickr.com/*" ]
+  },
+  {
+    "js": [ "rightclick.js" ],
+    "matches": [ "http://*/*", "https://*/*" ]
+  }
+  ],
 "description": "Re-enable the possibility to use the context menu on sites that overrides it.",
 "homepage": "http://code.google.com/p/regis/wiki/AllowRightClickExtension",
 "name": "Allow Right Click",
-"version": "1.0"
+"version": "1.1"
 }

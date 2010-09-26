@@ -3,7 +3,8 @@
   "email": "decamps@users.sf.com",
   "name": "Régis Décamps"
   } ],
-"icons": { "48": "mouse48.png",
+"icons": { "16": "mouse16.png",
+          "48": "mouse48.png",
           "128": "mouse128.png" },
 "content_scripts": [ 
   { 

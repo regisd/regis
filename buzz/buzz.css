@@ -1,0 +1,19 @@
+.buzz-error, .buzz-post {
+	font-family: sans-serif;
+}
+/* error message */	
+.buzz-error {
+	font-color: red;
+}
+/* main post */
+.buzz-post {
+	
+}
+/* info such as author */
+.buzz-info {
+	color: grey;
+}
+/* meta-information such as publication date */
+.buzz-meta {
+	color: green;
+}

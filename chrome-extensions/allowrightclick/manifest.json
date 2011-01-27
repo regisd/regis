@@ -13,6 +13,7 @@
   },
   {
     "js": [ "rightclick.js" ],
+    "all_frames": true,
     "matches": [ "http://*/*", "https://*/*" ]
   }
   ],

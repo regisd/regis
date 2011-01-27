@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Allow Right Click preferences</title>
+<script type="text/javascript">
+/* Saves options to localStorage.
+ */
+function save_options() {
+	var whitelist = document.getElementById("whitelist");
+	localStorage["whitelist"] = whitelist.value;
+	// Update status to let user know options were saved.
+	var status = document.getElementById("status");
+	status.innerHTML = "Preverences saved";
+	setTimeout(function() {
+		status.innerHTML = "";
+	}, 1200);
+	
+	var hackYoutubeBox = document.getElementById("hackYoutube");
+	localStorage["hackYoutube"]=hackYoutubeBox.checked;
+}
+
+/* Restores select box state to saved value from localStorage.
+ */
+function restore_options() {
+	var whitelist = localStorage["whitelist"];
+	if (!whitelist) {
+		whitelist="google|yahoo";
+	}
+	var whitelistInput = document.getElementById("whitelist");
+	whitelistInput.value=whitelist;
+	
+	var hackYoutube = localStorage["hackYoutube"];
+	var hackYoutubeBox = document.getElementById("hackYoutube");
+	hackYoutubeBox.checked=hackYoutube;
+}
+</script>
+</head>
+
+<body onload="restore_options()">
+<h1>White list</h1>
+<p>The following sites are considered fair. The extension won't remove the context menu on them.</p>
+<p>For exemple, <em>Yahoo! mail</em> makes a fair use of the context menu. You should place yahoo in this list.
+The list is actually a <a href="https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Writing_a_Regular_Expression_Pattern">regular expression</a>
+against which the <em>domain</em> of the current page is matched. To make it simple: separate domain with a pipe (<tt>|</tt>) an don't use spaces nor slashes (<tt>/</tt>)</p>
+<p>
+<label for="whitelist">White-list</label><input id="whitelist"/></p>
+
+<h1>Hacks</h1>
+<p>Activate or deactivate these experimental hacks</p>
+<p><input type="checkbox" id="hackYoutube">Youtube (html 5 video)</input></p>
+
+
+<hr/>
+<button onclick="save_options()">Save</button>
+<div id="status"></div>
+</body>
+</html>

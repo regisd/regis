@@ -15,9 +15,6 @@ function save_options() {
 	setTimeout(function() {
 		status.innerHTML = "";
 	}, 1200);
-	
-	var hackYoutubeBox = document.getElementById("hackYoutube");
-	localStorage["hackYoutube"]=hackYoutubeBox.checked;
 }
 
 /* Restores select box state to saved value from localStorage.
@@ -29,10 +26,6 @@ function restore_options() {
 	}
 	var whitelistInput = document.getElementById("whitelist");
 	whitelistInput.value=whitelist;
-	
-	var hackYoutube = localStorage["hackYoutube"];
-	var hackYoutubeBox = document.getElementById("hackYoutube");
-	hackYoutubeBox.checked=hackYoutube;
 }
 </script>
 </head>
@@ -45,11 +38,6 @@ The list is actually a <a href="https://developer.mozilla.org/en/JavaScript/Guid
 against which the <em>domain</em> of the current page is matched. To make it simple: separate domain with a pipe (<tt>|</tt>) an don't use spaces nor slashes (<tt>/</tt>)</p>
 <p>
 <label for="whitelist">White-list</label><input id="whitelist"/></p>
-
-<h1>Hacks</h1>
-<p>Activate or deactivate these experimental hacks</p>
-<p><input type="checkbox" id="hackYoutube">Youtube (html 5 video)</input></p>
-
 
 <hr/>
 <button onclick="save_options()">Save</button>

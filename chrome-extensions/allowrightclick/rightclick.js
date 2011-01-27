@@ -18,17 +18,21 @@ function enableContextMenu() {
   void(document.onclick=null);
   void(document.onmousedown=null);
   void(document.onmouseup=null);
-  void(document.oncontextmenu=null);
   void(document.body.oncontextmenu=null);
-  removeContextOn("img");
-  removeContextOn("td");
+  removeContextMenuOn(document);
+  removeContextOnAll("img");
+  removeContextOnAll("td");
 }
 
-function removeContextOn(elt) {
-  var elements=document.getElementsByTagName(elt);
+function removeContextOnAll(eltName) {
+  var elements=document.getElementsByTagName(eltName);
   //for (var e in elements) {
   for (var i=0;i<elements.length;i++) {
-    e=elements[i];
-    void(e.oncontextmenu=null);    
+    removeContextMenuOn(elements[i]);
   }
+}
+
+function removeContextMenuOn(elt) {
+    void(elt.oncontextmenu=null);
+    elt.addEventListener("contextmenu", function(event) {event.returnValue = true;}, false);
 }

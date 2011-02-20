@@ -1,19 +1,28 @@
-var whitelist = localStorage["whitelist"];
-if (!whitelist) {
-    whitelist="google|yahoo";
-  }
-if (!document.domain.match(whitelist)) {
-  //deactivate the extension on these sites (saves Yahoo! mail, etc)
-  var timer = window.setInterval(function() {
-            if (/loaded|complete/.test(document.readyState)){
-                window.clearInterval(timer);
-                enableContextMenu();
-            }
-          }, 30);
-}
+console.debug("allow right click initializing for "+window.location)
+chrome.extension.sendRequest({method: "optionwhitelist"}, function(response) {
+	// activate the extension if the domain doesn't match the whitelist
+	whitelist=response.value;
+	
+	if (!whitelist) {
+	    whitelist="google|yahoo";
+	}
+	// don't enable the extension on these sites (saves Yahoo! mail, etc)
+	if (!document.domain.match(whitelist)) {
+		  var timer = window.setInterval(function() {
+			  if (/loaded|complete/.test(document.readyState)){
+		       window.clearInterval(timer);
+		       enableContextMenu();
+			  }
+		  }, 30);
+	}
+	else {
+		consol.debug("allow right click not applied because the domain name matches "+whitelist);
+	}
+});
+
 
 function enableContextMenu() {
-  console.log("allow right click on "+window.location);
+  console.log("allow right click processing "+window.location);
   void(document.ondragstart=null);
   void(document.onselectstart=null);
   void(document.onclick=null);
@@ -23,8 +32,15 @@ function enableContextMenu() {
   removeContextMenuOn(document);
   removeContextOnAll("img");
   removeContextOnAll("td");
-  removeContextOnAll("div");
-  //miscHacks();
+  chrome.extension.sendRequest({method: "optionaggressivelist"}, function(response) {
+	  aggressivelist=response.value;
+	  if (!aggressivelist) {
+		  aggressivelist="youtube";
+	  }
+	  if (document.domain.match(aggressivelist)) {
+		  removeContextOnAll("div");  
+	  }
+  });
 }
 
 function removeContextOnAll(eltName) {
@@ -44,15 +60,4 @@ function removeContextMenuOn(elt) {
 //reduces memory footprint with a single named function
 function bringBackDefault(event) {
 	event.returnValue = true;	
-}
-
-function miscHacks() {
-	// see flickr.css
-	// Cannot read the localStorage in this context. Need to send a message to the background page.
-	if (document.domain.match("youtube")) {
-		chrome.extension.sendRequest({method: "optionhackYoutube"}, function(response) {
-			if(response.value)
-				youtubeHack();
-		});
-	}
 }

@@ -22,5 +22,5 @@
 "description": "Re-enable the possibility to use the context menu on sites that overrides it.",
 "homepage": "http://code.google.com/p/regis/wiki/AllowRightClickExtension",
 "name": "Allow Right Click",
-"version": "1.2"
+"version": "1.2.1"
 }

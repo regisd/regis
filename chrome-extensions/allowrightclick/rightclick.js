@@ -30,6 +30,7 @@ function enableContextMenu() {
   void(document.onmouseup=null);
   void(document.body.oncontextmenu=null);
   removeContextMenuOn(document);
+  removeContextOnAll("body");
   removeContextOnAll("img");
   removeContextOnAll("td");
   chrome.extension.sendRequest({method: "optionaggressivelist"}, function(response) {

@@ -2,11 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Allow Right Click preferences</title>
+<title>Allow Right Click</title>
 <script type="text/javascript">
 	/* Saves options to localStorage.
 	 */
 	function save_options() {
+		var button = document.getElementById("save-button");
+		var _textContent=button.textContent;
+		button.textContent="Saving";
+		button.disabled=true;
+		
 		var whitelist = document.getElementById("whitelist").value;
 		localStorage["whitelist"] = whitelist;
 
@@ -16,6 +21,8 @@
 		// Update status to let user know options were saved.
 		var status = document.getElementById("status");
 		status.innerHTML = "Preverences saved";
+		button.textContent=_textContent;
+		button.disabled=false;
 		setTimeout(function() {
 			status.innerHTML = "";
 		}, 1200);
@@ -39,10 +46,60 @@
 		aggressivelistInput.value = aggressivelist;
 	}
 </script>
+<style>
+body {
+  font-family:helvetica, arial, sans-serif;
+  font-size:80%;
+  margin:10px;
+}
+
+#header {
+  padding-bottom:1.5em;
+  padding-top:1.5em;
+}
+
+#header h1 {
+  font-size: 156%;
+  display:inline;
+  padding-bottom:43px;
+  padding-left:75px;
+  padding-top:40px;
+  background:url("mouse128.png") no-repeat;
+  background-size:67px;
+  background-position:1px 18px;
+}
+
+h2 {
+  background:#ebeff9;
+  border-top:1px solid #b5c7de;
+  font-size:99%;
+  padding:3px 0 2px 5px;
+  font-weight:bold;
+  margin-bottom:1em;
+  margin-top:4em;
+}
+
+.first {
+  margin-top:1em;
+}
+
+#footer {
+  margin-top:4em;
+}
+#save-button {
+  font-weight:bold;
+}
+button.disabled {
+	font-weight:normal;
+}
+</style>
 </head>
 
 <body onload="restore_options()">
-<h1>White list</h1>
+<div id="header">
+<h1>AllowRightClick Options</h1>
+</div>
+<h2 class="first">White list</h2>
 <p>The following sites are considered fair. The extension won't
 remove the context menu on them.</p>
 <p>For exemple, <em>Yahoo! mail</em> makes a fair use of the context
@@ -53,14 +110,15 @@ matched. To make it simple: separate domain with a pipe (<tt>|</tt>) an
 don't use spaces nor slashes (<tt>/</tt>)</p>
 <p><label for="whitelist">White-list</label><input id="whitelist" /></p>
 
-<h1>Aggressive list</h1>
+<h2>Aggressive list</h2>
 <p>On those sites, the context-menu will be reset on <tt>div</tt>
 elements, as well.</p>
 <p><label for="aggressivelist">Be aggressive on</label><input
 	id="aggressivelist" /></p>
 
-<hr />
-<button onclick="save_options()">Save</button>
+<div id="footer">
+<button onclick="save_options()" id="save-button">Save</button>
 <div id="status"></div>
+</div>
 </body>
 </html>

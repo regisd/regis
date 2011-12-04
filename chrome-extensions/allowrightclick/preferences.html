@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <title>Allow Right Click</title>
 <script type="text/javascript">
+    /* i18n */
+    function init() {
+    	setChildTextNode('title','option_page_title');    	
+    }
+    
+    function setChildTextNode(elementId, messageId) {
+        document.getElementById(elementId).innerText = chrome.i18n.getMessage(messageId);
+    }
+    
 	/* Saves options to localStorage.
 	 */
 	function save_options() {
@@ -97,7 +106,7 @@ button.disabled {
 
 <body onload="restore_options()">
 <div id="header">
-<h1>AllowRightClick Options</h1>
+<h1 id="title">AllowRightClick Options</h1>
 </div>
 <h2 class="first">White list</h2>
 <p>The following sites are considered fair. The extension won't

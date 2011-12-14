@@ -16,7 +16,7 @@ chrome.extension.sendRequest({method: "optionwhitelist"}, function(response) {
 		  }, 30);
 	}
 	else {
-		consol.debug("allow right click not applied because the domain name matches "+whitelist);
+		console.debug("allow right click not applied because the domain name matches "+whitelist);
 	}
 });
 
